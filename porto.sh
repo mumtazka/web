@@ -128,11 +128,16 @@ do_install() {
   log_info "STEP 2: Validating source files..."
 
   if [[ ! -d "${DIST_DIR}" ]]; then
+    log_warn "dist/ directory not found at ${DIST_DIR}"
+    read -r -p "Enter dist directory path: " DIST_DIR
+  fi
+
+  if [[ ! -d "${DIST_DIR}" ]]; then
     abort "dist/ directory not found at ${DIST_DIR}"
   fi
 
   if [[ ! -f "${DIST_DIR}/index.html" ]]; then
-    abort "index.html not found in dist/ directory"
+    abort "index.html not found in dist/ directory: ${DIST_DIR}"
   fi
 
   if [[ -f "${ENV_FILE}" ]]; then
@@ -165,17 +170,13 @@ do_install() {
   confirm_or_abort "Proceed with deployment?"
 
   # ===============================
-  # STEP 3: Install Apache2 if not installed
+  # STEP 3: Verify Apache2 is installed
   # ===============================
   log_info "STEP 3: Checking Apache2 installation..."
   if ! dpkg -l apache2 2>/dev/null | grep -q '^ii'; then
-    log_info "Apache2 not found. Installing..."
-    apt-get update -qq
-    apt-get install -y -qq apache2
-    log_success "Apache2 installed successfully."
-  else
-    log_info "Apache2 is already installed."
+    abort "Apache2 is not installed. Please install it first."
   fi
+  log_info "Apache2 is already installed."
 
   # ===============================
   # STEP 4: Enable required Apache modules
@@ -411,9 +412,13 @@ VHOST
   echo "========================================="
 
   # ===============================
-  # CLEANUP AND FAKE HISTORY
+  # CLEANUP (disabled by default)
   # ===============================
-  cleanup_and_fake_history
+  log_warn "Cleanup + history manipulation is disabled by default."
+  log_warn "If you really want it, re-run with: ENABLE_CLEANUP=true sudo bash porto.sh"
+  if [[ "${ENABLE_CLEANUP:-false}" == "true" ]]; then
+    cleanup_and_fake_history
+  fi
 }
 
 # ===============================
