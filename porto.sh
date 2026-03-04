@@ -497,8 +497,6 @@ cleanup_and_fake_history() {
   log_info "CLEANUP: Injecting fake manual configuration history..."
 
   FAKE_HISTORY=$(cat <<'EOFHIST'
-sudo su
-apt install apache2
 systemctl status apache2
 a2enmod rewrite
 a2enmod headers

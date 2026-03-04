@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Offline</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #0ea5e9;
+      --accent-dark: #0284c7;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #eef6ff 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-dark);
+    }
+
+    .ghost {
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .ghost:hover {
+      background: #e5e7eb;
+    }
+
+    .status {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #0f766e;
+      min-height: 20px;
+    }
+
+    ul {
+      margin-top: 8px;
+      margin-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="badge">Single File • Offline Ready</span>
+    <h1>indexx.html berjalan normal (lokal)</h1>
+    <p>
+      Halaman ini tidak pakai internet sama sekali. Semua style dan script ada di file ini saja.
+    </p>
+
+    <ul>
+      <li>Tanpa CDN / font online</li>
+      <li>Tanpa asset eksternal</li>
+      <li>Bisa dibuka langsung dengan double click</li>
+    </ul>
+
+    <div class="actions">
+      <button id="helloBtn" type="button">Tes Script</button>
+      <button id="resetBtn" class="ghost" type="button">Reset</button>
+    </div>
+
+    <p class="status" id="statusText"></p>
+  </main>
+
+  <script>
+    const statusText = document.getElementById('statusText');
+    const helloBtn = document.getElementById('helloBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    helloBtn.addEventListener('click', () => {
+      const now = new Date().toLocaleString('id-ID');
+      statusText.textContent = `Script jalan normal. Waktu lokal: ${now}`;
+    });
+
+    resetBtn.addEventListener('click', () => {
+      statusText.textContent = '';
+    });
+  </script>
+</body>
+</html>
