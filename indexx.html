@@ -594,8 +594,7 @@
             border-radius: 8px;
             font-family: 'Fira Code', monospace;
             font-size: 12px;
-            opacity: 0;
-            animation: fadeSlideIn 1s forwards
+            opacity: 1;
         }
 
         .hero-code-snippet:nth-child(1) {
@@ -1904,9 +1903,8 @@
         }
 
         .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity .7s, transform .7s
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .reveal.visible {
@@ -2072,7 +2070,9 @@
                         <div class="line"></div>
                     </div>
                     <p class="hero-desc reveal" style="transition-delay:.6s">
-                        <span id="typingText"></span><span class="typing-cursor" id="typingCursor"></span>
+                        <span id="typingText">I build scalable web applications and create exceptional digital
+                            experiences. Passionate about clean code, modern technologies, and solving complex
+                            problems.</span><span class="typing-cursor" id="typingCursor" style="display:none"></span>
                     </p>
                     <div class="hero-buttons reveal" style="transition-delay:.8s">
                         <button class="btn-primary" onclick="scrollTo_('projects')">See My Work <svg width="16"
@@ -2516,7 +2516,8 @@
             { title: 'Cloud Computing Fundamentals', issuer: 'Google Cloud', date: '2024-01-12', desc: 'Google Cloud Platform essentials and deployment skills.' }
         ];
 
-        // ═══ TYPING ANIMATION ═══
+        // Typing animation disabled for better VM compatibility
+        /*
         const TYPING_TEXT = "I build scalable web applications and create exceptional digital experiences. Passionate about clean code, modern technologies, and solving complex problems.";
         let charIndex = 0;
         function typeText() {
@@ -2530,6 +2531,7 @@
             }
         }
         setTimeout(typeText, 500);
+        */
 
         // ═══ SCROLL & NAV ═══
         function scrollTo_(id) {
